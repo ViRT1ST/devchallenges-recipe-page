@@ -251,7 +251,7 @@ html {
 
 /* стили при наведении курсора на checkbox */
 .checkbox:not(:disabled) + label:hover::before {
-  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4666666667);
+  box-shadow: 0 0 0 2px transparent;
 }
 
 /* стили для активного чекбокса (при нажатии на него) */
