@@ -36,7 +36,7 @@
 -   HTML
 -   CSS
 -   BEM
--   SASS
+-   SCSS
 
 ## Features
 
