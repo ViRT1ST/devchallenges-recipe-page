@@ -1,0 +1,699 @@
+@charset "UTF-8";
+@import url("https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap");
+@import url("https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap");
+html {
+  -moz-tab-size: 4;
+  -o-tab-size: 4;
+     tab-size: 4;
+}
+
+html {
+  line-height: 1.15;
+  -webkit-text-size-adjust: 100%;
+}
+
+body {
+  margin: 0;
+}
+
+html {
+  font-family: system-ui, -apple-system, "Segoe UI", Roboto, Helvetica, Arial, sans-serif, "Apple Color Emoji", "Segoe UI Emoji";
+}
+
+hr {
+  height: 0;
+  color: inherit;
+}
+
+abbr[title] {
+  -webkit-text-decoration: underline dotted;
+          text-decoration: underline dotted;
+}
+
+b,
+strong {
+  font-weight: bolder;
+}
+
+kbd,
+pre,
+code,
+samp {
+  font-family: ui-monospace, SFMono-Regular, Consolas, "Liberation Mono", Menlo, monospace;
+  font-size: 1em;
+}
+
+small {
+  font-size: 80%;
+}
+
+sub,
+sup {
+  font-size: 75%;
+  line-height: 0;
+  position: relative;
+  vertical-align: baseline;
+}
+
+sub {
+  bottom: -0.25em;
+}
+
+sup {
+  top: -0.5em;
+}
+
+table {
+  text-indent: 0;
+  border-color: inherit;
+}
+
+button,
+input,
+optgroup,
+select,
+textarea {
+  font-family: inherit;
+  font-size: 100%;
+  line-height: 1.15;
+  margin: 0;
+}
+
+button,
+select {
+  text-transform: none;
+}
+
+button,
+[type=button],
+[type=reset],
+[type=submit] {
+  -webkit-appearance: button;
+}
+
+::-moz-focus-inner {
+  border-style: none;
+  padding: 0;
+}
+
+:-moz-focusring {
+  outline: 1px dotted ButtonText;
+}
+
+:-moz-ui-invalid {
+  box-shadow: none;
+}
+
+legend {
+  padding: 0;
+}
+
+progress {
+  vertical-align: baseline;
+}
+
+::-webkit-inner-spin-button,
+::-webkit-outer-spin-button {
+  height: auto;
+}
+
+[type=search] {
+  -webkit-appearance: textfield;
+  outline-offset: -2px;
+}
+
+::-webkit-search-decoration {
+  -webkit-appearance: none;
+}
+
+::-webkit-file-upload-button {
+  -webkit-appearance: button;
+  font: inherit;
+}
+
+summary {
+  display: list-item;
+}
+
+*,
+::before,
+::after {
+  box-sizing: border-box;
+  padding: 0;
+  margin: 0;
+}
+
+html {
+  font-size: 10px;
+  font-weight: 400;
+}
+
+html, body {
+  width: 100%;
+  height: 100%;
+}
+
+a,
+a:visited,
+a:active,
+a:focus,
+a:hover {
+  text-decoration: none;
+  color: inherit;
+}
+
+li {
+  list-style: none;
+}
+
+button {
+  cursor: pointer;
+}
+
+/* =============================================================== */
+/* Variables and mixins                                            */
+/* =============================================================== */
+/* =============================================================== */
+/* Common                                                          */
+/* =============================================================== */
+html {
+  background-color: #fff;
+  color: #000;
+  font-family: "Montserrat", sans-serif;
+}
+
+.body__layout {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  min-height: 100vh;
+}
+
+.utility__page-width-container {
+  display: flex;
+  max-width: 1000px;
+  margin: 0 auto;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+}
+@media (min-width: 768px) {
+  .utility__page-width-container {
+    padding: 2rem 2rem;
+  }
+}
+
+/* ========================================================== */
+/* Custom Checkbox                                            */
+/* ========================================================== */
+/* used code: https://itchief.ru/html-and-css/styling-checkbox-and-radio */
+/* для элемента input c type="checkbox" */
+.checkbox {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label, связанного с .checkbox */
+.checkbox + label {
+  -webkit-user-select: none;
+     -moz-user-select: none;
+      -ms-user-select: none;
+          user-select: none;
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: #333333;
+}
+
+.checkbox.center + label {
+  align-items: center;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.checkbox + label::before {
+  content: "";
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 0.5px solid #4F4F4F;
+  background-color: transparent;
+  border-radius: 0.25em;
+  margin-right: 1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+  transform: scale(1.5);
+  margin-top: 0.5rem;
+}
+
+/* стили при наведении курсора на checkbox */
+.checkbox:not(:disabled) + label:hover::before {
+  box-shadow: 0 0 0 2px rgba(255, 255, 255, 0.4666666667);
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.checkbox:not(:disabled):active + label::before {
+  background-color: transparent;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.checkbox:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.checkbox:focus:not(:checked) + label::before {
+  border-color: #ccc;
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.checkbox:checked + label::before {
+  background-color: transparent;
+  background-image: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23000' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+  background-size: 8px 8px;
+  border-color: #4F4F4F;
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.checkbox:disabled + label::before {
+  background-color: #e9ecef;
+}
+
+/* =============================================================== */
+/* Main                                                            */
+/* =============================================================== */
+.main {
+  background-color: #fff;
+  flex-grow: 1;
+  display: flex;
+}
+.main > .utility__page-width-container {
+  flex-direction: column;
+}
+@media (min-width: 768px) {
+  .main > .utility__page-width-container {
+    width: 100%;
+  }
+}
+@media (min-width: 992px) {
+  .main > .utility__page-width-container {
+    flex-direction: row;
+  }
+}
+
+.recipe__grid-container {
+  display: grid;
+  grid-template-columns: 1fr;
+}
+@media (min-width: 992px) {
+  .recipe__grid-container {
+    grid-template-columns: 1fr 21.6rem;
+  }
+}
+
+.recipe__title {
+  grid-column: 1/-1;
+  margin-top: 1rem;
+}
+@media (min-width: 992px) {
+  .recipe__title {
+    margin-top: 2rem;
+  }
+}
+
+.recipe__title > h1 {
+  font-family: "Playfair Display", serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+}
+@media (min-width: 992px) {
+  .recipe__title > h1 {
+    font-size: 4.8rem;
+  }
+}
+
+.recipe__description {
+  position: relative;
+  display: flex;
+  margin-top: 1.2rem;
+  grid-column: 1/-1;
+  font-family: Montserrat;
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 500;
+  color: #4F4F4F;
+}
+@media (min-width: 992px) {
+  .recipe__description {
+    margin-top: 1.8rem;
+    font-size: 1.4rem;
+    max-width: 62rem;
+  }
+}
+
+.recipe__description-icon {
+  position: absolute;
+  font-family: "Material Symbols Rounded";
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #C4C4C4;
+  top: -0.2rem;
+  left: 0;
+  font-style: normal;
+  transform: rotate(90deg);
+}
+
+.recipe__description-icon::before {
+  content: "\e945";
+}
+
+.recipe__description-text {
+  padding-left: 2.5rem;
+}
+
+.recipe__photo {
+  margin-top: 2.5rem;
+  grid-column: 1/-1;
+  border-radius: 1rem;
+}
+@media (min-width: 992px) {
+  .recipe__photo {
+    margin-top: 4rem;
+  }
+}
+
+.recipe__photo > img {
+  width: 100%;
+  -o-object-fit: cover;
+     object-fit: cover;
+  -o-object-position: center;
+     object-position: center;
+  aspect-ratio: 16/9;
+  border-radius: 1.5rem;
+}
+
+.recipe__infographics {
+  margin-top: 2.2rem;
+  display: grid;
+  grid-template-columns: 1fr 1fr 1fr;
+  grid-template-rows: 1fr 1fr;
+  gap: 2.6rem 1rem;
+  grid-template-areas: "yields yields yields" "prep-time cook-time total-time";
+  order: 0;
+}
+@media (min-width: 768px) {
+  .recipe__infographics {
+    grid-template-columns: 1fr 1fr 1fr 1fr;
+    grid-template-rows: 1fr;
+    gap: 0 0;
+    grid-template-areas: "yields prep-time cook-time total-time";
+  }
+}
+@media (min-width: 992px) {
+  .recipe__infographics {
+    max-height: 35rem;
+    margin-top: 4.5rem;
+    gap: 0 0;
+    padding: 5rem 0 0 5.5rem;
+    border-radius: 1.5rem;
+    grid-template-columns: 1fr;
+    grid-template-rows: 7rem 7rem 7rem 7rem;
+    grid-template-areas: "yields" "prep-time" "cook-time" "total-time";
+    box-shadow: rgba(180, 188, 196, 0.3) 0 0 1.5rem 0;
+  }
+}
+@media (min-width: 992px) {
+  .recipe__infographics {
+    order: 1;
+  }
+}
+
+.recipe__infographics-item {
+  position: relative;
+  padding-left: 2.2rem;
+}
+@media (min-width: 992px) {
+  .recipe__infographics-item {
+    padding-left: 3rem;
+  }
+}
+
+.recipe__infographics-icon {
+  position: absolute;
+  font-family: "Material Symbols Rounded";
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #4F4F4F;
+  top: 0.1rem;
+  left: 0;
+}
+@media (min-width: 992px) {
+  .recipe__infographics-icon {
+    left: -1.4rem;
+    top: 0;
+    font-weight: 500;
+    font-size: 3.3rem;
+  }
+}
+
+.recipe__infographics-icon.yields-icon::before {
+  color: #F2994A;
+  content: "\e561";
+}
+
+.recipe__infographics-icon.time-icon::before {
+  content: "\e8b5";
+}
+
+.recipe__infographics-item h6 {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: #BDBDBD;
+}
+@media (min-width: 992px) {
+  .recipe__infographics-item h6 {
+    padding-bottom: 0.4rem;
+    font-size: 1rem;
+  }
+}
+
+.recipe__infographics-item span {
+  font-weight: 500;
+  font-size: 1rem;
+}
+@media (min-width: 992px) {
+  .recipe__infographics-item span {
+    font-size: 1.4rem;
+  }
+}
+
+.recipe__infographics-item.yields span {
+  grid-area: yields;
+  color: #F2994A;
+}
+
+.recipe__infographics-item.prep-time span,
+.recipe__infographics-item.cook-time span,
+.recipe__infographics-item.total-time span {
+  color: #333333;
+}
+
+.recipe__infographics-item.prep-time {
+  grid-area: prep-time;
+}
+
+.recipe__infographics-item.cook-time {
+  grid-area: cook-time;
+}
+
+.recipe__infographics-item.total-time {
+  grid-area: total-time;
+}
+
+.recipe__ingridients h3 {
+  margin-top: 3.6rem;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: #333333;
+}
+@media (min-width: 992px) {
+  .recipe__ingridients h3 {
+    margin-top: 4.6rem;
+    font-size: 2.5rem;
+  }
+}
+
+.recipe__ingridients h5 {
+  margin-top: 1.6rem;
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: #333333;
+}
+@media (min-width: 992px) {
+  .recipe__ingridients h5 {
+    margin-top: 3rem;
+    font-size: 1.9rem;
+  }
+}
+
+.recipe__ingridients h4 {
+  font-family: "Playfair Display", serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: #333333;
+  margin-top: 2.8rem;
+}
+@media (min-width: 992px) {
+  .recipe__ingridients h4 {
+    margin-top: 3.2rem;
+    font-size: 1.9rem;
+  }
+}
+
+.recipe__ingridients-list {
+  margin-top: 2.4rem;
+  margin-left: 0.4rem;
+}
+@media (min-width: 992px) {
+  .recipe__ingridients-list {
+    margin-top: 2.8rem;
+  }
+}
+
+.recipe__ingridients-item {
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+
+.recipe__ingridients-item-text {
+  font-family: "Montserrat", sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.6rem;
+  color: #333333;
+}
+@media (min-width: 992px) {
+  .recipe__ingridients-item-text {
+    padding-left: 0.5rem;
+    font-size: 1.6rem;
+  }
+}
+
+.topping-suggestions {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.recipe__instructions {
+  order: 0;
+}
+@media (min-width: 992px) {
+  .recipe__instructions {
+    order: 1;
+  }
+}
+
+.recipe__instructions h2 {
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: #333333;
+  margin-top: 2.4rem;
+}
+
+.recipe__instructions-list {
+  margin-top: 3rem;
+  display: flex;
+  flex-direction: column;
+}
+
+.recipe__instructions-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+
+.recipe__instructions-item-number {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 3.6rem;
+  max-height: 3.6rem;
+  min-height: 3.6rem;
+  max-height: 3.6rem;
+  border-radius: 0.6rem;
+  background: #F2994A;
+  font-family: "Playfair Display", serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: white;
+  padding-top: 0.1rem;
+  margin-right: 1rem;
+  margin-top: 0.4rem;
+}
+
+.recipe__instructions-item-text {
+  font-family: "Montserrat";
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: black;
+  line-height: 2.4rem;
+}
+
+.recipe__source {
+  margin-top: 2rem;
+  font-family: "Montserrat";
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 150%;
+  color: #BDBDBD;
+}
+@media (min-width: 992px) {
+  .recipe__source {
+    font-size: 1.6rem;
+  }
+}
+
+/* =============================================================== */
+/* Footer                                                          */
+/* =============================================================== */
+.footer {
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 8rem;
+}
+.footer > .utility__page-width-container {
+  justify-content: center;
+  align-items: center;
+  height: 100%;
+}
+.footer__text {
+  text-align: center;
+  color: #A9A9A9;
+  font-family: "Montserrat";
+  font-weight: 500;
+  font-size: 1.2rem;
+}
+@media (min-width: 992px) {
+  .footer__text {
+    font-size: 1.4rem;
+  }
+}
+.footer__link {
+  color: inherit;
+  font-family: inherit;
+}
+.footer__link:hover {
+  text-decoration: underline;
+}

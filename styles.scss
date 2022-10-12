@@ -1,0 +1,543 @@
+@import url('https://fonts.googleapis.com/css2?family=Montserrat:ital,wght@0,400;0,500;0,700;1,400;1,500&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,700;1,400&display=swap');
+
+@import './normalize';
+
+/* =============================================================== */
+/* Variables and mixins                                            */  
+/* =============================================================== */
+
+// maximum content width
+$content-max-size: 1000px;
+
+// breakpoints
+$md: 768px;
+$lg: 992px;
+$xl: 1200px;
+
+// colors
+$bg-color-default: #fff;
+$bg-color-main: #fff;
+$link-hover-color: #d7d3dc;
+
+$gray1: #333333;
+$gray2: #4F4F4F;
+$gray4: #BDBDBD;
+$orange: #F2994A;
+
+@mixin min-width($_size) {
+  @media (min-width: $_size) {
+    @content;
+  }
+}
+
+@mixin hovered-link() {
+  color: $link-hover-color;
+}
+
+@mixin hovered-nav-link() {
+  color: $link-hover-color;
+  border-bottom: $link-hover-color 2px solid;
+  font-weight: 700;
+}
+
+/* =============================================================== */
+/* Common                                                          */
+/* =============================================================== */
+
+html {
+  background-color: $bg-color-default;
+  color: #000;
+  font-family: 'Montserrat', sans-serif;
+}
+
+.body {
+  &__layout {
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    min-height: 100vh;
+  }
+}
+
+.utility__page-width-container {
+  display: flex;
+  max-width: $content-max-size;
+  margin: 0 auto;
+  justify-content: space-between;
+  padding: 2rem 1rem;
+  @include min-width($md) {
+    padding: 2rem 2rem;
+  }
+}
+
+
+/* ========================================================== */
+/* Custom Checkbox                                            */
+/* ========================================================== */
+
+$checkbox-mark: url("data:image/svg+xml,%3csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 8 8'%3e%3cpath fill='%23000' d='M6.564.75l-3.59 3.612-1.538-1.55L0 4.26 2.974 7.25 8 2.193z'/%3e%3c/svg%3e");
+$checkbox-bg: transparent;
+$checkbox-border: $gray2;
+$checkbox-outline: #ffffff77;
+
+/* used code: https://itchief.ru/html-and-css/styling-checkbox-and-radio */
+
+/* для элемента input c type="checkbox" */
+.checkbox {
+  display: none;
+  position: absolute;
+  z-index: -1;
+  opacity: 0;
+}
+
+/* для элемента label, связанного с .checkbox */
+.checkbox + label {
+  // display: inline-flex;
+  user-select: none;
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  color: $gray1;
+}
+
+.checkbox.center + label {
+  align-items: center;
+}
+
+/* создание в label псевдоэлемента before со следующими стилями */
+.checkbox + label::before {
+  content: '';
+  display: inline-block;
+  width: 1em;
+  height: 1em;
+  flex-shrink: 0;
+  flex-grow: 0;
+  border: 0.5px solid $checkbox-border;
+  background-color: $checkbox-bg;
+  border-radius: 0.25em;
+  margin-right: 1em;
+  background-repeat: no-repeat;
+  background-position: center center;
+  background-size: 50% 50%;
+  transform: scale(1.5);
+  margin-top: 0.5rem;
+}
+
+/* стили при наведении курсора на checkbox */
+.checkbox:not(:disabled) + label:hover::before {
+  box-shadow: 0 0 0 2px $checkbox-outline;
+}
+
+/* стили для активного чекбокса (при нажатии на него) */
+.checkbox:not(:disabled):active + label::before {
+  background-color: $checkbox-bg;
+}
+
+/* стили для чекбокса, находящегося в фокусе */
+.checkbox:focus + label::before {
+  box-shadow: 0 0 0 0.2rem rgba(0, 123, 255, 0.25);
+}
+
+/* стили для чекбокса, находящегося в фокусе и не находящегося в состоянии checked */
+.checkbox:focus:not(:checked) + label::before {
+  border-color: #ccc;
+}
+
+/* стили для чекбокса, находящегося в состоянии checked */
+.checkbox:checked + label::before {
+  background-color: $checkbox-bg;
+  background-image: $checkbox-mark;
+  background-size: 8px 8px;
+  border-color: $checkbox-border;
+}
+
+/* стили для чекбокса, находящегося в состоянии disabled */
+.checkbox:disabled + label::before {
+  background-color: #e9ecef;
+}
+
+/* =============================================================== */
+/* Main                                                            */
+/* =============================================================== */
+
+.main {
+  background-color: $bg-color-main;
+  flex-grow: 1;
+  display: flex;
+
+  & > .utility__page-width-container {
+    flex-direction: column;
+    @include min-width($md) {
+      width: 100%;
+    }
+    @include min-width($lg) {
+      flex-direction: row;
+    }
+  }
+}
+
+.recipe__grid-container{
+  display: grid;
+  grid-template-columns: 1fr;
+  @include min-width($lg) {
+    grid-template-columns: 1fr 21.6rem;
+  }
+}
+
+.recipe__title {
+  grid-column: 1 / -1;
+  margin-top: 1rem;
+  @include min-width($lg) {
+    margin-top: 2rem;
+  }
+}
+
+.recipe__title > h1 {
+  font-family: 'Playfair Display', serif;
+  font-size: 2.4rem;
+  font-weight: 700;
+  @include min-width($lg) {
+    font-size: 4.8rem;
+  }
+}
+
+.recipe__description {
+  position: relative;
+  display: flex;
+  margin-top: 1.2rem;
+  grid-column: 1 / -1;
+  font-family: Montserrat;
+  font-size: 1.2rem;
+  font-style: italic;
+  font-weight: 500;
+  color: $gray2;
+  @include min-width($lg) {
+    margin-top: 1.8rem;
+    font-size: 1.4rem;
+    max-width: 62rem;
+  }
+}
+
+.recipe__description-icon {
+  position: absolute;
+  font-family: 'Material Symbols Rounded';
+  font-weight: 700;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: #C4C4C4;
+  top: -0.2rem;
+  left: 0;
+  font-style: normal;
+  transform: rotate(90deg);
+}
+
+.recipe__description-icon::before {
+  content: "\e945";
+}
+
+.recipe__description-text {
+  padding-left: 2.5rem;
+}
+
+.recipe__photo {
+  margin-top: 2.5rem;
+  grid-column: 1 / -1;
+  border-radius: 1rem;
+  @include min-width($lg) {
+    margin-top: 4rem;
+  }
+}
+
+.recipe__photo > img {
+  width: 100%;
+  object-fit: cover;
+  object-position: center;
+  aspect-ratio: 16 / 9;
+  border-radius: 1.5rem;
+}
+
+.recipe__infographics {
+  margin-top: 2.2rem;
+  display: grid; 
+  grid-template-columns: 1fr 1fr 1fr; 
+  grid-template-rows: 1fr 1fr; 
+  gap: 2.6rem 1rem; 
+  grid-template-areas: 
+    "yields yields yields"
+    "prep-time cook-time total-time";
+
+  @include min-width($md) {  
+    grid-template-columns: 1fr 1fr 1fr 1fr; 
+    grid-template-rows: 1fr; 
+    gap: 0 0; 
+    grid-template-areas: 
+      "yields prep-time cook-time total-time";
+  }
+  @include min-width($lg) {
+    max-height: 35rem;
+    margin-top: 4.5rem;
+    gap: 0 0; 
+    padding: 5rem 0 0 5.5rem;
+    border-radius: 1.5rem;
+    grid-template-columns: 1fr; 
+    grid-template-rows: 7rem 7rem 7rem 7rem; 
+    grid-template-areas:
+      "yields"
+      "prep-time"
+      "cook-time"
+      "total-time";
+    box-shadow: rgba(180, 188, 196, 0.3) 0 0 1.5rem 0
+  }
+  order: 0;
+  @include min-width($lg) {
+    order: 1;
+  }
+}
+
+.recipe__infographics-item {
+  position: relative;
+  padding-left: 2.2rem;
+  @include min-width($lg) {
+    padding-left: 3rem;
+  }
+}
+
+.recipe__infographics-icon {
+  position : absolute;
+  font-family: 'Material Symbols Rounded';
+  font-weight: 400;
+  font-size: 1.8rem;
+  line-height: 1;
+  color: $gray2;
+  top: 0.1rem;
+  left: 0;
+  @include min-width($lg) {
+    left: -1.4rem;
+    top: 0;
+    font-weight: 500;
+    font-size: 3.3rem;
+  }
+}
+
+.recipe__infographics-icon.yields-icon::before {
+  color: $orange;
+  content: "\e561";
+}
+
+.recipe__infographics-icon.time-icon::before {
+  content: "\e8b5";
+}
+
+
+.recipe__infographics-item h6 {
+  font-weight: 700;
+  font-size: 0.8rem;
+  text-transform: uppercase;
+  color: $gray4;
+  @include min-width($lg) {
+    padding-bottom: 0.4rem;
+    font-size: 1rem;
+  }
+}
+
+.recipe__infographics-item span {
+  font-weight: 500;
+  font-size: 1rem;
+  @include min-width($lg) {
+    font-size: 1.4rem;
+  }
+}
+
+.recipe__infographics-item.yields span {
+  grid-area: yields;
+  color: $orange;
+}
+
+.recipe__infographics-item.prep-time span,
+.recipe__infographics-item.cook-time span,
+.recipe__infographics-item.total-time span {
+  color: $gray1;
+}
+
+.recipe__infographics-item.prep-time {
+  grid-area: prep-time;
+}
+
+.recipe__infographics-item.cook-time {
+  grid-area: cook-time;
+}
+
+.recipe__infographics-item.total-time {
+  grid-area: total-time;
+}
+
+.recipe__ingridients h3 {
+  margin-top: 3.6rem;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 1.8rem;
+  color: $gray1;
+  @include min-width($lg) {
+    margin-top: 4.6rem;
+    font-size: 2.5rem;
+  }
+}
+
+.recipe__ingridients h5 {
+  margin-top: 1.6rem;
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: $gray1;
+  @include min-width($lg) {
+    margin-top: 3rem;
+    font-size: 1.9rem;
+  }
+}
+
+.recipe__ingridients h4 {
+  font-family: 'Playfair Display', serif;
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.8rem;
+  color: $gray1;
+  margin-top: 2.8rem;
+  @include min-width($lg) {
+    margin-top: 3.2rem;
+    font-size: 1.9rem;
+  }
+}
+
+.recipe__ingridients-list {
+  margin-top: 2.4rem;
+  margin-left: 0.4rem;
+  @include min-width($lg) {
+    margin-top: 2.8rem;
+  }
+}
+
+.recipe__ingridients-item {
+  display: flex;
+  margin-bottom: 0.8rem;
+}
+
+.recipe__ingridients-item-text {
+  font-family: 'Montserrat', sans-serif;
+  font-weight: 400;
+  font-size: 1.4rem;
+  line-height: 2.6rem;
+  color: $gray1;
+  @include min-width($lg) {
+    padding-left: 0.5rem;
+    font-size: 1.6rem;
+  }
+}
+
+.topping-suggestions {
+  font-weight: 500;
+  font-style: italic;
+}
+
+.recipe__instructions {
+  order: 0;
+  @include min-width($lg) {
+    order: 1;
+  }
+}
+
+.recipe__instructions h2 {
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: $gray1;
+  margin-top: 2.4rem;
+}
+
+.recipe__instructions-list {
+  margin-top: 3rem;
+  display: flex; 
+  flex-direction: column;
+}
+
+.recipe__instructions-item {
+  display: flex;
+  flex-direction: row;
+  margin-bottom: 2rem;
+}
+
+.recipe__instructions-item-number {
+  display: flex;
+  justify-content: center;
+  align-items: flex-start;
+  min-width: 3.6rem;
+  max-height: 3.6rem;
+  min-height: 3.6rem;
+  max-height: 3.6rem;
+  border-radius: 0.6rem;
+  background: $orange;
+  font-family: 'Playfair Display', serif;
+  font-weight: 700;
+  font-size: 2.4rem;
+  color: white;
+  padding-top: 0.1rem;
+  margin-right: 1rem;
+  margin-top: 0.4rem;
+}
+
+.recipe__instructions-item-text {
+  font-family: 'Montserrat';
+  font-weight: 400;
+  font-size: 1.6rem;
+  color: black;
+  line-height: 2.4rem;
+}
+
+.recipe__source {
+  margin-top: 2rem;
+  font-family: 'Montserrat';
+  font-style: italic;
+  font-weight: 400;
+  font-size: 1.2rem;
+  line-height: 150%;
+  color: $gray4;
+  @include min-width($lg) {
+    font-size: 1.6rem;
+  }
+}
+
+/* =============================================================== */
+/* Footer                                                          */
+/* =============================================================== */
+
+.footer {
+  flex-grow: 0;
+  flex-shrink: 0;
+  height: 8rem;
+
+  & > .utility__page-width-container {
+    justify-content: center;
+    align-items: center;
+    height: 100%;
+  }
+
+  &__text {
+    text-align: center;
+    color: #A9A9A9;
+    font-family: 'Montserrat';
+    font-weight: 500;
+    font-size: 1.2rem;
+    @include min-width($lg) {
+      font-size: 1.4rem;
+    }
+  }
+
+  &__link {
+    color: inherit;
+    font-family: inherit;
+    &:hover {
+      text-decoration: underline;
+    }
+  }
+}
